@@ -1,0 +1,282 @@
+---
+import { Image } from 'astro:assets'
+
+import { twMerge } from 'tailwind-merge'
+
+import Button from '@/components/Button.astro'
+import Icon from '@/components/Icon'
+import { button } from '@/components/variants'
+import hero from '@/images/subscription/hero.jpg'
+import planClassic from '@/images/subscription/plan-classic.jpg'
+import planLuxe from '@/images/subscription/plan-luxe.jpg'
+import planSeasonal from '@/images/subscription/plan-seasonal.jpg'
+import plan from '@/images/subscription/plan.jpg'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout>
+  <main class="grid lg:grid-cols-2">
+    <div
+      class="max-lg:grid-rule-y lg:grid-rule-x grid lg:col-span-full lg:grid-cols-subgrid">
+      <div
+        class="-mb-px grid place-content-center place-items-center self-start border-b bg-black lg:sticky lg:top-(--header-height)">
+        <Image
+          src={hero}
+          alt=""
+          class="col-start-1 row-start-1 aspect-375/420 h-auto w-full object-cover sm:aspect-768/500 lg:aspect-square"
+          fetchpriority="high"
+          loading="eager"
+        />
+      </div>
+      <div class="grid px-4 py-10 sm:p-(--grid-padding-fluid)">
+        <h1 class="text-3xl/1.2 sm:text-4xl/1.2 font-medium">
+          Flower Subscription
+        </h1>
+        <div class="mt-4 grid gap-y-6">
+          {
+            Object.entries({
+              'For-Yourself': [
+                'The perfect way to keep your home fresh and beautiful. Get a regular delivery of stunning bouquets straight to your doorstep without lifting a finger. Enjoy the beauty and fragrance of fresh flowers. hassle-free!',
+              ],
+              'As-a-Gift': [
+                'Simply provide us with their address and let us take case of the rest, delivering veautiful blooms straight to their doorstep at the frequency and duration of your choosing.',
+              ],
+              'For-Business': [
+                'Is a great way to create a pleasant atmosphere and leave a good impression on your guests and customers. Fresh floral arrangements will improve the aesthetic image of your business, and our service guarantees timely replacement without extra care or effort on your part.',
+              ],
+            }).map(([title, items]) => (
+              <section class="grid gap-y-2">
+                <h2 class="text-base/1.2">{title.replaceAll('-', ' ')}</h2>
+                <ul class="list-disc pl-4">
+                  {items.map((item) => (
+                    <li class="text-base/1.4">{item}</li>
+                  ))}
+                </ul>
+              </section>
+            ))
+          }
+        </div>
+        <Button href="/" color="secondary" class="mt-12 uppercase">
+          Explore plans
+        </Button>
+      </div>
+    </div>
+
+    <section
+      class="lg:grid-rule-x max-lg:grid-rule-y grid border-t lg:col-span-full lg:grid-cols-subgrid">
+      <h2
+        class="text-3xl/1.2 self-start px-4 py-10 font-medium sm:p-(--grid-padding-fluid) lg:sticky lg:top-(--header-height)">
+        How does it work?
+      </h2>
+      <div class="grid-rule-y grid">
+        {
+          Object.entries({
+            'Choose-a-plan':
+              'Select the subscription plan that suits you best from our three bouquet designs: classic, seasonal, and deluxe. Each plan comes with a designer vase, free delivery, and a discount of up to 30%. Our seasonal and deluxe plans also include a luxurious scented candle to enhance the ambiance.',
+            'Frequency-and-Duration':
+              'Choose delivery frequency: once a week, every two weeks, or once a month. Then, select your subscription duration from 3 to 12 months. Enjoy savings with a longer subscription. We understand that every customer has different needs, and we aim to provide flexible subscription options that cater to your specific preferences.',
+            'Pay once':
+              'After entering your contact and delivery information and paying for your subscription, you can sit back and relax, knowing that you have secured a regula supply of fresh, stunning flowers for yourself or your loved ones.',
+          }).map(([title, body]) => (
+            <section class="grid gap-y-4 px-4 py-10 sm:p-(--grid-padding-fluid)">
+              <h2 class="text-2xl/1.2">{title.replaceAll('-', ' ')}</h2>
+              <p class="text-base/1.4">{body}</p>
+            </section>
+          ))
+        }
+      </div>
+    </section>
+
+    <section
+      class="max-lg:grid-rule-y grid grid-flow-row-dense border-t lg:col-span-full lg:grid-cols-subgrid">
+      <div class="self-start lg:sticky lg:top-(--header-height) lg:col-start-2">
+        <Image
+          src={plan}
+          alt=""
+          class="aspect-375/420 h-auto w-full object-cover object-top sm:aspect-768/500 lg:aspect-square"
+        />
+      </div>
+      <form
+        class="@container grid place-content-start px-4 py-10 sm:p-(--grid-padding-fluid) lg:border-r">
+        <hgroup class="grid gap-y-6">
+          <p class="text-sm/1.2 uppercase">Build your subscription</p>
+          <h2 class="text-3xl/1.2 font-medium">Selecting a plan</h2>
+        </hgroup>
+        <p class="text-base/1.4 mt-4">
+          Enjoy free shipping on every order and save up to 30%.<br />
+          Every bouquet we deliver is carefully curated to ensure it arrives fresh
+          and stunning. To modify, pause, or cancel your subscription, simply log
+          in to your account dashboard.<br />
+          You're in complete control of your flower delivery experience.
+        </p>
+        <div class="mt-6 grid gap-y-4">
+          {
+            Object.entries({
+              Classic: {
+                contents: [
+                  'Price $45',
+                  'Free delivery',
+                  'Best for a budget',
+                  'Glass vase with first delivery',
+                  'Save up to 25%',
+                ],
+                image: planClassic,
+              },
+              Seasonal: {
+                contents: [
+                  'Price $65',
+                  'Free delivery',
+                  'Best seasonal selections',
+                  'Glass vase with first delivery',
+                  'Luxury candle with your first delivery',
+                  'Save up to 28%',
+                ],
+                image: planSeasonal,
+              },
+              Luxe: {
+                contents: [
+                  'Price $95',
+                  'Free delivery',
+                  'Premium arrangement',
+                  'Premium vase with first delivery',
+                  'Luxury candle with your first delivery',
+                  'Save up to 30%',
+                ],
+                image: planLuxe,
+              },
+            }).map(([title, { contents, image }]) => (
+              <section class="border-light-gray has-checked:ring-status-success grid border has-checked:ring-2 @md:grid-cols-2">
+                <Image
+                  src={image}
+                  alt=""
+                  class="border-light-gray h-auto w-full object-cover @max-md:border-b @md:h-full"
+                />
+                <div class="grid place-content-start gap-y-4 p-4">
+                  <h2 class="text-lg/1.2">{title}</h2>
+                  <ul class="list-disc pl-4">
+                    {contents.map((content) => (
+                      <li class="text-base/1.4">{content}</li>
+                    ))}
+                  </ul>
+                </div>
+                <label class={twMerge(button(), 'uppercase @md:col-span-full')}>
+                  <input
+                    type="radio"
+                    name="plan"
+                    value={title}
+                    class="sr-only"
+                  />
+                  Select
+                </label>
+              </section>
+            ))
+          }
+        </div>
+        <hr class="border-light-gray my-10 border-t" />
+        <div class="">
+          <hgroup class="">
+            <p class="text-2xl/1.2">How often do you want flowers delivered?</p>
+            <h3 class="text-base/1.4 mt-4">Select the delivery frequency</h3>
+          </hgroup>
+          <ul class="mt-6 grid gap-4 @md:grid-cols-3">
+            {
+              ['monthly', 'bi-weekly', 'weekly'].map((label) => (
+                <label
+                  class={twMerge(
+                    button({ color: 'secondary' }),
+                    'uppercase has-checked:bg-black has-checked:text-white'
+                  )}>
+                  <input
+                    type="radio"
+                    name="frequency"
+                    value={label}
+                    class="sr-only"
+                  />
+                  {label}
+                </label>
+              ))
+            }
+          </ul>
+        </div>
+        <hr class="border-light-gray my-10 border-t" />
+        <div class="">
+          <hgroup class="">
+            <p class="text-2xl/1.2">How many deliveries would you like ?</p>
+            <h3 class="sr-only">Select number of deliveries</h3>
+          </hgroup>
+          <p class="mt-4">
+            Pay once and do not worry about flowers, our bouquets will be
+            beautiful and on time, as many times as you need.
+          </p>
+          <div
+            class="grid-rule-x mt-6 grid w-full grid-cols-[--spacing(11)_1fr_--spacing(11)] border">
+            <button type="button" class="text-2xl">
+              <Icon name="minus" />
+            </button>
+            <input
+              type="text"
+              name="quantity"
+              class="w-full p-2.5 text-center"
+              value="1"
+            />
+            <button type="button" class="text-2xl">
+              <Icon name="plus" />
+            </button>
+          </div>
+        </div>
+        <hr class="border-light-gray my-10 border-t" />
+        <button type="submit" class={twMerge(button(), 'uppercase')}>
+          Checkout
+        </button>
+      </form>
+    </section>
+
+    <section class="bg-extra-light border-t py-10 sm:px-10 lg:col-span-full">
+      <div
+        class="container max-w-216 border-y bg-white py-10 sm:border-x sm:p-(--grid-padding-fluid)">
+        <h2 class="text-3xl/1.2 font-medium">Subscription FAQ</h2>
+        <div class="mt-6 grid">
+          {
+            [
+              {
+                q: 'How often will I get a new bouquet?',
+                a: 'Our subscriptions allow you to select a delivery frequency that best suits your needs - either weekly, bi-weekly, or monthly. You can also choose the number of deliveries for your subscription. Choose any combination that works for you!',
+              },
+              {
+                q: 'Can I send subscription like as a gift?',
+                a: 'Yes, you can send a subscription as a gift. You can select the frequency and duration of the subscription, and we will deliver the flowers to the recipient at the specified address.',
+              },
+              {
+                q: 'Can I choose which bouquet I get?',
+                a: 'Yes, you can choose which bouquet you get. You can select the bouquet you want from the plan you select.',
+              },
+              {
+                q: 'Can I change the shipping address?',
+                a: 'Yes, you can change the shipping address. You can change the shipping address by logging in to your account and updating your shipping address.',
+              },
+              {
+                q: 'What day will the subscription bouquet come?',
+                a: 'The subscription bouquet will come on the same day every week, bi-weekly, or monthly, depending on the plan you select.',
+              },
+              {
+                q: 'Can I suspend my subscription to flowers?',
+                a: 'Yes, you can suspend your subscription to flowers. You can suspend your subscription by logging in to your account and suspending your subscription.',
+              },
+            ].map(({ q, a }) => (
+              <details class="group">
+                <summary class="text-lg/1.2 sm:text-2xl/1.2 grid grid-cols-[1fr_--spacing(6)] items-center gap-x-2 border-b py-4">
+                  {q}
+                  <Icon
+                    name="arrow-right"
+                    className="rotate-45 transition-transform group-open:-rotate-45 motion-reduce:transition-none"
+                  />
+                </summary>
+                <p class="text-base/1.4 py-4">{a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

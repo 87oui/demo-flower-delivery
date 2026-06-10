@@ -1,0 +1,105 @@
+---
+import { Image } from 'astro:assets'
+
+import Button from '@/components/Button.astro'
+import Social from '@/components/Social.astro'
+import about from '@/images/about/about.svg'
+import hero from '@/images/about/hero.jpg'
+import passion01 from '@/images/about/passion-01.jpg'
+import passion02 from '@/images/about/passion-02.jpg'
+import passion03 from '@/images/about/passion-03.jpg'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout>
+  <main class="grid-rule-y grid lg:grid-cols-2">
+    <div class="grid lg:col-span-full lg:grid-cols-subgrid">
+      <div class="grid place-content-center px-4 py-10 text-center">
+        <h1 class="text-4xl/1.2 grid place-items-center gap-y-6 font-medium">
+          Our Story
+          <Image
+            src={about}
+            alt=""
+            class=""
+            fetchpriority="high"
+            loading="eager"
+          />
+          Kyiv LuxeBouquets
+        </h1>
+        <p class="text-base/1.4 mt-6 max-w-lg">
+          Discover Uniquely Crafted Bouquets and Gifts for Any Occation: Spread
+          Joy with Our <em>Online Flower Delivery Service</em>
+        </p>
+        <Social
+          class="mt-16 justify-center gap-x-4 sm:gap-x-8 [&_a]:rounded-full [&_a]:border"
+        />
+      </div>
+      <Image
+        src={hero}
+        alt=""
+        class="aspect-375/420 h-auto w-full object-cover sm:aspect-768/500 lg:aspect-square lg:border-l"
+        fetchpriority="high"
+        loading="eager"
+      />
+    </div>
+
+    <section
+      class="border-t px-4 py-10 text-center lg:col-span-full lg:p-(--grid-padding-fluid)">
+      <hgroup class="grid gap-y-6">
+        <h2 class="text-sm/1.2 uppercase">Our story</h2>
+        <p class="text-2xl/1.2 sm:text-3xl/1.2 font-medium">
+          Our Founder's Passion
+        </p>
+      </hgroup>
+      <p class="text-base/1.4 mx-auto mt-4 max-w-152">
+        Kyiv LuxeBouquets was founded in 2010 by Natalia Zelinska with the goal
+        of bringing unique and exquisite bouquets to the people of Kyiv. Natalia
+        has always had a passion for flowers and design, and his vision was to
+        create a local floral studio that would specialize in the creation and
+        delivery of fresh, beautiful, and distinctive bouquets.
+      </p>
+    </section>
+
+    {
+      [
+        {
+          title: 'Expertly Crafted Bouquets',
+          body: 'At Kyiv LuxeBouquets, we take pride in our team of talented and experienced florists who carefully select each bloom, ensuring that only the freshest and most stunning flowers make it into our bouquets. We work directly with farms to source the highest quality flowers, and our skilled florists expertly craft each bouquet to perfection.',
+          image: passion01,
+        },
+        {
+          title: 'Bouquets, Gifts & Ambiance',
+          body: 'In addiction to our stunning bouquets, we also offer a collection of dried bouquets, house plants, and fragrant candles from luxury brands to create the perfect ambiance. We believe that sending flowers, plants, and gifts should be easy and stress-free, which is why we offer same or next-day delivery thoughout Kyiv.',
+          image: passion02,
+        },
+        {
+          title: 'Making Every Day Special',
+          body: 'Our mission is simple: to make every day special and memorable for our customers. We are dedicated to providing the highest quality flowers, exceptional customer service, and a seamless online experience that will make you feed confident and satisfied with your purchase. Thank you for choosing Kyiv LuxeBouquets. We look forward to bringing joy and happiness to your life with our beautiful bouquets and gifts.',
+          image: passion03,
+        },
+      ].map(({ title, body, image }) => (
+        <section class="group grid grid-flow-row-dense lg:col-span-full lg:grid-cols-subgrid">
+          <Image
+            src={image}
+            alt=""
+            class="aspect-375/420 h-auto w-full object-cover sm:aspect-768/500 lg:aspect-square lg:group-even:col-start-2 lg:group-even:border-l"
+          />
+          <div class="px-4 py-10 sm:p-(--grid-padding-fluid) lg:group-odd:border-l">
+            <h2 class="text-2xl/1.2 sm:text-3xl/1.2 font-medium">{title}</h2>
+            <p class="text-base/1.4 mt-4">{body}</p>
+          </div>
+        </section>
+      ))
+    }
+
+    <section
+      class="grid place-items-center px-4 py-10 text-center sm:p-(--grid-padding-fluid) lg:col-span-full">
+      <h2 class="text-3xl/1.2 font-medium">Discover Our Beautiful Bouquets</h2>
+      <p class="text-base/1.4 mt-4 max-w-160">
+        Explore our collection of exquisite bouquets and surprise your loved
+        ones with the perfect gift. Click the button below to start shopping.
+      </p>
+      <Button href="/shop" class="mt-14 uppercase">Shop Now</Button>
+    </section>
+  </main>
+</Layout>

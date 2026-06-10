@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { twMerge } from 'tailwind-merge'
+import type { VariantProps } from 'tailwind-variants'
+
+import { button } from '@/components/variants'
+
+export type Props = VariantProps<typeof button> & HTMLAttributes<'a'>
+
+const { color, size, class: className, ...props } = Astro.props
+---
+
+<a class={twMerge(button({ color, size }), className)} {...props}>
+  <slot />
+</a>

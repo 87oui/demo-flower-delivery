@@ -1,0 +1,124 @@
+---
+import { twMerge } from 'tailwind-merge'
+
+import Social from '@/components/Social.astro'
+import { button, input } from '@/components/variants'
+---
+
+<footer
+  class="grid *:border-t *:border-black *:px-4 *:py-10 sm:grid-cols-2 *:sm:px-10 sm:max-xl:*:even:border-l xl:grid-cols-4 xl:*:not-first:border-l">
+  <form action="" class="grid place-content-start gap-y-4">
+    <p class="text-base/1.4">
+      Remember to offer beautiful flowers from Kyiv LuxeBouquets Valentines Day,
+      Mothers Day, Christmas...<br />
+      Reminds you 7 days before. No spam or sharing your address
+    </p>
+    <input
+      type="email"
+      name="email"
+      placeholder="Your Email"
+      autocomplete="email"
+      required
+      aria-required="true"
+      class={input()}
+    />
+    <button type="submit" class={twMerge(button(), 'uppercase')}>Remind</button>
+  </form>
+
+  <section class="">
+    <h2 class="">Contact us</h2>
+    <dl class="mt-4">
+      {
+        [
+          {
+            title: 'Address',
+            content: '15/4 Khreshchatyk Street, Kyiv',
+          },
+          {
+            title: 'Phone',
+            content: '+380980099777',
+          },
+          {
+            title: 'General enquiry',
+            content: 'Kiev.Florist.Studio@gmail.com',
+          },
+        ].map(({ title, content }) => (
+          <Fragment>
+            <dt class="text-gray text-sm/1.2 mt-4">{title}:</dt>
+            <dd class="text-sm:1.2 mt-2 font-medium tracking-wide">
+              {content}
+            </dd>
+          </Fragment>
+        ))
+      }
+    </dl>
+    <h2 class="">Follow us</h2>
+    <Social />
+  </section>
+
+  <section class="">
+    {
+      Object.entries({
+        shop: [
+          'All products',
+          'Fresh flowers',
+          'Dried flowers',
+          'Live plants',
+          'Designer vases',
+          'Aroma candles',
+          'Freshener diffuser',
+        ],
+        service: ['Flower subscription', 'Wedding & Event decor'],
+      }).map(([title, items]) => (
+        <Fragment>
+          <h2>{title}</h2>
+          <ul class="mt-4 space-y-2">
+            {items.map((label) => (
+              <li class="text-sm/1.2 capitalize">
+                <a href="/shop" class="block">
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Fragment>
+      ))
+    }
+  </section>
+
+  <section class="">
+    <h2>About us</h2>
+    <ul class="mt-4 space-y-2">
+      {
+        ['Our story', 'Blog'].map((label) => (
+          <li class="text-sm/1.2">
+            <a href="/" class="block">
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="mt-4 space-y-2">
+      {
+        ['Shipping & returns', 'Terms & conditions', 'Privacy policy'].map(
+          (label) => (
+            <li class="text-sm/1.2">
+              <a href="/" class="block">
+                {label}
+              </a>
+            </li>
+          )
+        )
+      }
+    </ul>
+  </section>
+</footer>
+
+<style>
+  @reference '@/styles/main.css';
+
+  h2 {
+    @apply text-gray text-lg leading-[1.2] capitalize not-first:mt-4;
+  }
+</style>

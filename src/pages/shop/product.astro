@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets'
+
+import { twMerge } from 'tailwind-merge'
+
+import Card from '@/components/Card.astro'
+import Icon from '@/components/Icon'
+import { button } from '@/components/variants'
+import VasesCarousel from '@/components/VasesCarousel.tsx'
+import hero from '@/images/shop/product/hero.jpg'
+import recommendCedarLavender from '@/images/shop/product/recommend-cedar_lavender.jpg'
+import recommendLimeMatcha from '@/images/shop/product/recommend-lime_matcha.jpg'
+import recommendOceanMist from '@/images/shop/product/recommend-ocean_mist.jpg'
+import recommendRattanGrapefruit from '@/images/shop/product/recommend-rattan_grapefruit.jpg'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout>
+  <main class="max-lg:grid-rule-y lg:grid-rule-x grid lg:grid-cols-2">
+    <div class="-mb-px self-start border-b lg:sticky lg:top-(--header-height)">
+      <Image
+        src={hero}
+        alt=""
+        class="col-start-1 row-start-1 aspect-375/420 h-auto w-full object-cover sm:aspect-768/670 lg:aspect-square"
+        fetchpriority="high"
+        loading="eager"
+      />
+    </div>
+    <form action="" class="grid gap-y-10 px-4 py-10 sm:p-10">
+      <div class="grid gap-y-6">
+        <ol class="text-sm/1.2 flex gap-x-1">
+          <li class="contents">
+            <a href="/shop" class="uppercase">Fresh flowers</a> /
+          </li>
+          <li class="contents">
+            <span class="text-gray uppercase">Rosy delight</span>
+          </li>
+        </ol>
+        <h1 class="text-2xl/1.2 font-semibold">Rosy Delight - $100</h1>
+        <p class="text-sm/1.4">
+          Large exceptional bouquet composed of a selection of David Austin
+          roses, known for for their beauty and subtle fragrance. The bouquet is
+          accompanied by seasonal foliage which will enhance these sublime
+          flowers even
+        </p>
+        <div class="grid gap-y-4">
+          <h2 class="text-lg/1.4">Quantity</h2>
+          <div
+            class="grid-rule-x mt-6 grid w-full grid-cols-[--spacing(11)_1fr_--spacing(11)] border">
+            <button type="button" class="text-2xl">
+              <Icon name="minus" />
+            </button>
+            <input
+              type="text"
+              name="quantity"
+              class="w-full p-2.5 text-center"
+              value="1"
+            />
+            <button type="button" class="text-2xl">
+              <Icon name="plus" />
+            </button>
+          </div>
+        </div>
+        <div
+          class="grid grid-flow-row-dense items-baseline gap-y-4 @md:grid-cols-[1fr_auto]">
+          <small class="text-sm/1.2 text-gray @md:col-start-2">
+            Vase not Included
+          </small>
+          <h2 class="text-lg/1.4">Excellent Combination with:</h2>
+          <VasesCarousel className="col-span-full" client:visible />
+        </div>
+        <div class="grid gap-y-4">
+          <h2 class="text-lg/1.4">Price options</h2>
+          <ul class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-4">
+            {
+              [
+                'One time purchase. Price $100',
+                'Subscribe now, and save 25% on this order.',
+              ].map((label) => (
+                <li class="group col-span-full grid grid-flow-row-dense grid-cols-subgrid">
+                  <label class="col-span-full col-start-2 grid grid-cols-subgrid text-base/6">
+                    <input type="radio" name="option" class="sr-only" />
+                    {label}
+                  </label>
+                  <div class="">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="hidden group-has-checked:block">
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="11.5"
+                        fill="#D2D2D7"
+                        stroke="#121212"
+                      />
+                      <circle cx="12" cy="12" r="7" fill="#121212" />
+                    </svg>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="group-has-checked:hidden">
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="11.5"
+                        fill="#D2D2D7"
+                        stroke="#121212"
+                      />
+                    </svg>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <button type="submit" class={twMerge(button(), 'uppercase')}>
+        Add to cart
+      </button>
+    </form>
+  </main>
+  <aside class="grid-rule-y border-t">
+    <h2 class="text-2xl/1.2 px-6 py-10 text-center font-medium">
+      You may also like...
+    </h2>
+    <div
+      class="lg:grid-rule-x max-sm:grid-rule-y grid sm:grid-cols-2 sm:max-lg:*:even:border-l sm:max-lg:*:nth-[n+3]:border-t lg:grid-cols-4">
+      {
+        [
+          {
+            title: 'Rattan Grapefruit',
+            price: 48,
+            image: recommendRattanGrapefruit,
+          },
+          {
+            title: 'Lime & Matcha',
+            price: 46,
+            image: recommendLimeMatcha,
+          },
+          {
+            title: 'Cedar & Lavender',
+            price: 64,
+            image: recommendCedarLavender,
+          },
+          {
+            title: 'Ocean Mist',
+            price: 58,
+            image: recommendOceanMist,
+          },
+        ].map(({ title, price, image }) => (
+          <Card key={title} class="relative">
+            <Image src={image} alt={title} slot="image" />
+            <a
+              href="/shop/product"
+              class="after:absolute after:inset-0"
+              slot="title">
+              {title}
+            </a>
+            <Fragment slot="subtitle">price ${price}</Fragment>
+          </Card>
+        ))
+      }
+    </div>
+  </aside>
+</Layout>

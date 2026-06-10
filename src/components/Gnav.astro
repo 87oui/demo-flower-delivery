@@ -1,0 +1,96 @@
+---
+import { twMerge } from 'tailwind-merge'
+
+const { class: className = '' } = Astro.props
+---
+
+<nav
+  role="navigation"
+  class={twMerge(
+    '@container container grid items-center grid-flow-row-dense h-full grid-cols-[1fr_auto_1fr] sm:grid-cols-[repeat(3,1fr)_auto_repeat(3,1fr)] grid-rows-(--header-height)',
+    className
+  )}>
+  <!--  -->
+</nav>
+
+<style>
+  @reference '@/styles/main.css';
+
+  #gnav-trigger {
+    anchor-name: --trigger-anchor;
+  }
+
+  #gnav {
+    position-anchor: --trigger-anchor;
+
+    @variant max-sm {
+      @apply absolute top-[anchor(bottom)] right-[anchor(right)] bottom-auto left-auto m-0 h-fit w-max transition-[opacity,height] transition-discrete duration-300 starting:h-0 starting:opacity-0;
+      @apply backdrop:opacity-0 backdrop:transition-opacity open:backdrop:opacity-100 starting:backdrop:opacity-0;
+
+      &:not(:open) {
+        @apply pointer-events-none block h-0 opacity-0;
+      }
+    }
+  }
+</style>
+
+<script>
+  const initGnav = (trigger: HTMLButtonElement) => {
+    const gnavId = trigger.getAttribute('aria-controls')
+    if (!gnavId) return
+
+    const gnav = document.getElementById(gnavId)
+    if (!(gnav instanceof HTMLDialogElement)) return
+
+    const breakpoint = getComputedStyle(document.documentElement)
+      .getPropertyValue('--breakpoint-sm')
+      .trim()
+    const mediaQuery = window.matchMedia(`(min-width: ${breakpoint})`)
+
+    const syncUi = () => {
+      trigger.setAttribute('aria-expanded', String(gnav.open))
+      trigger.setAttribute(
+        'aria-label',
+        gnav.open ? 'メニューを閉じる' : 'メニューを開く'
+      )
+      gnav.toggleAttribute('data-scroll-lock', gnav.open)
+    }
+
+    const setNavVisibility = () => {
+      if (mediaQuery.matches && gnav.open) {
+        gnav.close()
+      }
+      syncUi()
+    }
+
+    mediaQuery.addEventListener('change', setNavVisibility)
+    setNavVisibility()
+
+    trigger.addEventListener('click', () => {
+      if (mediaQuery.matches) return
+
+      if (gnav.open) {
+        gnav.close()
+      } else {
+        gnav.show()
+      }
+    })
+
+    gnav.addEventListener('close', syncUi)
+    gnav.addEventListener('open', syncUi)
+
+    // リンクがクリックされたら閉じる
+    gnav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (!mediaQuery.matches && gnav.open) {
+          gnav.close()
+        }
+      })
+    })
+  }
+
+  const trigger = document.getElementById('gnav-trigger')
+  if (trigger instanceof HTMLButtonElement) {
+    initGnav(trigger)
+  }
+</script>

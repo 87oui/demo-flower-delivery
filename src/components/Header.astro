@@ -1,0 +1,307 @@
+---
+import { Image } from 'astro:assets'
+
+import { twMerge } from 'tailwind-merge'
+
+import Button from '@/components/Button.astro'
+import Icon from '@/components/Icon'
+import Social from '@/components/Social.astro'
+import { button, input, dialog } from '@/components/variants'
+import productRosyDelight from '@/images/products/product-rosy_delight.jpg'
+---
+
+<header
+  class="sticky top-0 left-0 z-10 grid h-(--header-height) w-full grid-cols-[var(--header-height)_1fr_var(--header-height)] border-y border-black bg-white *:grid *:place-content-center lg:grid-cols-[repeat(2,--spacing(45))_1fr_repeat(2,--spacing(45))]">
+  <button
+    type="button"
+    aria-controls="gnav"
+    aria-label="メニューを開く"
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    class="js-dialog-trigger col-start-1 border-r lg:hidden">
+    <Icon name="menu" />
+  </button>
+  <a href="/shop" class="border-r max-lg:hidden">Shop</a>
+  <a href="/" class="border-r max-lg:hidden">Contact</a>
+  <button
+    type="button"
+    aria-expanded="false"
+    aria-controls="sign-in"
+    aria-haspopup="dialog"
+    class="js-dialog-trigger -col-end-2 border-l max-lg:hidden">
+    Sign in
+  </button>
+  <button
+    type="button"
+    aria-controls="bag"
+    aria-label="ショッピングカートを開く"
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    class="js-dialog-trigger -col-end-1 border-l">
+    <Icon name="bag" className="lg:hidden" />
+    <span class="max-lg:hidden">Cart</span>
+  </button>
+</header>
+
+<dialog
+  id="gnav"
+  class={twMerge(dialog({ direction: 'left' }), 'max-w-96 h-dvh')}>
+  <div
+    class="js-dialog-inner grid h-full grid-rows-[var(--header-height)_auto_1fr_auto] divide-y divide-inherit">
+    <header class="px-3.5">
+      <button
+        type="button"
+        aria-controls="gnav"
+        aria-label="メニューを閉じる"
+        class="grid h-full place-content-center">
+        <Icon name="close" />
+      </button>
+    </header>
+    <ul class="divide-y divide-inherit">
+      <li class="text-lg/1.2 block p-6">
+        <button
+          type="button"
+          aria-expanded="false"
+          aria-controls="sign-in"
+          aria-haspopup="dialog"
+          class="js-dialog-trigger">
+          Sign in
+        </button>
+      </li>
+      {
+        [
+          {
+            label: 'Shop',
+            href: '/shop',
+          },
+          {
+            label: 'Subscription',
+            href: '/subscription',
+          },
+          {
+            label: 'Contact',
+            href: '/contact',
+          },
+          {
+            label: 'About us',
+            href: '/about',
+          },
+        ].map(({ label, href }) => (
+          <li class="">
+            <a href={href} class="text-lg/1.2 block p-6">
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="grid place-content-start gap-y-4 p-6">
+      {
+        [
+          {
+            label: 'Shipping & returns',
+            href: '/',
+          },
+          {
+            label: 'Terms & conditions',
+            href: '/',
+          },
+          {
+            label: 'Privacy policy',
+            href: '/',
+          },
+        ].map(({ label, href }) => (
+          <li class="">
+            <a href={href} class="text-sm/1.2 block">
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <Social class="p-3" />
+  </div>
+</dialog>
+
+<dialog
+  id="bag"
+  class={twMerge(dialog({ direction: 'right' }), 'max-w-180 h-dvh')}>
+  <form
+    action="/checkout"
+    class="js-dialog-container @container grid h-full grid-rows-[var(--header-height)_1fr_auto_auto_auto_auto] divide-y divide-inherit">
+    <header
+      class="grid grid-cols-[1fr_var(--header-height)] items-center px-3.5">
+      <h2 class="text-base/1 capitalize">shopping cart</h2>
+      <button
+        type="button"
+        aria-controls="bag"
+        aria-label="ショッピングカートを閉じる"
+        class="grid h-full place-content-center">
+        <Icon name="close" />
+      </button>
+    </header>
+    <div
+      class="grid grid-cols-[1fr_auto] grid-rows-[auto_1fr_auto] items-end gap-4 px-4 py-6 @sm:grid-cols-[auto_1fr_auto] @sm:items-center">
+      <Image
+        src={productRosyDelight}
+        alt="Rosy Delight"
+        class="size-40 border object-cover @max-sm:col-span-2"
+      />
+      <div class="space-y-2">
+        <h3 class="text-lg/1.4 font-medium">Rosy Delight</h3>
+        <p class="text-base/1.4">Quantity (1)</p>
+        <p class="text-lg/1.4 font-medium">$100</p>
+      </div>
+      <button
+        type="button"
+        class={twMerge(
+          button({ color: 'ghost', size: 'sm' }),
+          'text-sm/1.2 font-semibold'
+        )}>
+        Remove
+      </button>
+    </div>
+    <div class="flex items-center justify-between px-4 py-6">
+      <h3 class="text-lg/1.4 font-medium">Subtotal</h3>
+      <p class="text-lg/1.2 font-medium">$100</p>
+    </div>
+    <textarea
+      name="message"
+      placeholder="Gift Message"
+      rows={4}
+      class={twMerge(input(), 'py-6')}></textarea>
+    <p class="text-sm/1.2 px-4 py-10 text-center">
+      Shipping & taxes calculated at checkout<br />
+      Free standard shipping within Kyiv
+    </p>
+    <button type="submit" class={twMerge(button(), 'uppercase')}>
+      Check out
+    </button>
+  </form>
+</dialog>
+
+<dialog
+  id="sign-in"
+  class={twMerge(
+    dialog({ direction: 'bottom' }),
+    'max-w-190 h-(--omit-header-height)'
+  )}>
+  <div
+    class="js-dialog-inner flex h-full flex-col items-center justify-between gap-y-6 px-4 py-10 sm:p-(--grid-padding-fluid) sm:pb-10">
+    <div class="grid place-content-start gap-y-6">
+      <h2 class="text-4xl/1.2 font-semibold">
+        Greetings! Welcome to luxury gift shop.
+      </h2>
+      <form action="" class="grid">
+        <h3 class="text-base/1.2">
+          Use your mobile number to sign up or log in
+        </h3>
+        <input
+          type="tel"
+          name="tel"
+          autocomplete="tel"
+          required
+          aria-required="true"
+          placeholder="+380XX XXX XX XX"
+          class={twMerge(input(), 'mt-3')}
+        />
+        <button type="submit" class={twMerge(button(), 'uppercase mt-4')}>
+          Continue
+        </button>
+      </form>
+      <p
+        class="text-light-gray text-sm/1.2 grid grid-cols-[1fr_auto_1fr] items-center gap-x-3 before:border-t before:border-current after:border-t after:border-current">
+        or
+      </p>
+      <div class="grid gap-x-4 gap-y-3 sm:grid-cols-2">
+        <h3 class="text-base/1.2 sm:col-span-2">
+          Instantly login or sign up via Google or Apple
+        </h3>
+        <Button color="secondary" class="uppercase">
+          <Icon name="google" />
+          Continue with Google
+        </Button>
+        <Button color="secondary" class="uppercase">
+          <Icon name="apple" />
+          Continue with Apple
+        </Button>
+      </div>
+    </div>
+    <footer
+      class="*:text-sm/1.2 flex items-center gap-x-3 *:font-medium *:underline *:underline-offset-3">
+      <a href="/" class="">Privacy Policy</a>
+      <hr class="h-full w-px bg-current" />
+      <a href="/" class="">Terms and Conditions</a>
+    </footer>
+  </div>
+</dialog>
+
+<style>
+  @reference '@/styles/main.css';
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  dialog {
+    @apply z-50 w-full;
+  }
+</style>
+
+<script>
+  const initTrigger = (trigger: HTMLButtonElement) => {
+    const targetId = trigger.getAttribute('aria-controls')
+    if (!targetId) return
+
+    const target = document.getElementById(targetId)
+    if (!(target instanceof HTMLDialogElement)) return
+
+    trigger.addEventListener('click', () => {
+      target.showModal()
+    })
+
+    target
+      .querySelector(`[aria-controls="${targetId}"]`)
+      ?.addEventListener('click', () => {
+        target.close()
+      })
+
+    const syncUi = () => {
+      trigger.setAttribute('aria-expanded', String(target.open))
+      trigger.setAttribute(
+        'aria-label',
+        target.open ? 'メニューを閉じる' : 'メニューを開く'
+      )
+    }
+    target.addEventListener('close', syncUi)
+    target.addEventListener('open', syncUi)
+
+    // リンクがクリックされたら閉じる
+    target.querySelectorAll('a,button').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (target.open) {
+          target.close()
+        }
+      })
+    })
+
+    // ダイアログの外をクリックされたら閉じる
+    target.addEventListener('click', (event) => {
+      const clicked = event.target
+      if (
+        clicked instanceof Element &&
+        clicked.closest('.js-dialog-inner') === null &&
+        target.open
+      ) {
+        target.close()
+      }
+    })
+  }
+
+  const triggers = document.querySelectorAll('.js-dialog-trigger')
+  for (const trigger of triggers) {
+    if (trigger instanceof HTMLButtonElement) {
+      initTrigger(trigger)
+    }
+  }
+</script>

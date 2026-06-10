@@ -1,0 +1,21 @@
+---
+import { twMerge } from 'tailwind-merge'
+
+import Icon from '@/components/Icon'
+
+const { class: className } = Astro.props
+---
+
+<ul class={twMerge('flex justify-between flex-wrap', className)}>
+  {
+    ['Instagram', 'Pinterest', 'Facebook', 'Twitter', 'Telegram'].map(
+      (name) => (
+        <li class="">
+          <a href="/" class="grid size-12 place-content-center">
+            <Icon name={name.toLowerCase()} />
+          </a>
+        </li>
+      )
+    )
+  }
+</ul>

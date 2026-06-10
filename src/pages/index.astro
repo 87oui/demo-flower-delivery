@@ -1,0 +1,292 @@
+---
+import { Image } from 'astro:assets'
+
+import { twMerge } from 'tailwind-merge'
+
+import Button from '@/components/Button.astro'
+import Card from '@/components/Card.astro'
+import Icon from '@/components/Icon'
+import ReviewsCarousel from '@/components/ReviewsCarousel'
+import Social from '@/components/Social.astro'
+import { button, input } from '@/components/variants'
+import exterior from '@/images/home/exterior.jpg'
+import hero from '@/images/home/hero.jpg'
+import shopAromaCandles from '@/images/home/shop-aroma_candles.jpg'
+import shopDriedFlowers from '@/images/home/shop-dried_flowers.jpg'
+import shopFreshFlowers from '@/images/home/shop-fresh_flowers.jpg'
+import shopFresheners from '@/images/home/shop-fresheners.jpg'
+import shopLivePlants from '@/images/home/shop-live_plants.jpg'
+import wedding from '@/images/home/wedding.jpg'
+import subscription from '@/images/subscription/plan.jpg'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout>
+  <div
+    class="max-lg:grid-rule-y lg:grid-rule-x grid lg:grid-cols-2 lg:grid-rows-[repeat(5,25cqi)]">
+    <div
+      class="grid grid-cols-2 self-start px-4 py-10 sm:p-(--grid-padding-fluid) lg:sticky lg:top-0 lg:col-start-1 lg:row-span-2 lg:-mb-px lg:grid-rows-subgrid lg:border-b">
+      <hgroup class="@container col-span-full grid">
+        <h1
+          class="text-3xl/1.2 sm:text-[min(11.96cqi,var(--text-5xl))]/1.2 font-semibold">
+          Kyiv LuxeBouquets<span class="font-medium">&reg;</span>
+        </h1>
+        <p class="text-sm/1.4 col-span-full mt-4 border-b border-current pb-6">
+          Discover Uniquely Crafted Bouquets and Gifts for Any Occation: Spread
+          Joy with Out <em>Online Flower Delivery Service</em>
+        </p>
+      </hgroup>
+      <div class="mt-4 border-r pr-4">
+        <Image
+          src={hero}
+          alt=""
+          class="h-full w-full object-cover"
+          fetchpriority="high"
+          loading="eager"
+        />
+      </div>
+      <p class="text-xs/1.2 mt-4 grid items-end pl-4">
+        Experience the joy of giving with our modern floral studio. Order online
+        and send fresh flowers, plants and gifts today.
+      </p>
+    </div>
+    <div
+      class="grid-rule-y grid grid-cols-2 lg:col-start-2 lg:row-span-full lg:grid-rows-subgrid">
+      {
+        [
+          {
+            title: 'Fresh Flowers',
+            image: shopFreshFlowers,
+          },
+          {
+            title: 'Dried Flowers',
+            image: shopDriedFlowers,
+          },
+          {
+            title: 'Live Plants',
+            image: shopLivePlants,
+          },
+          {
+            title: 'Aroma Candles',
+            image: shopAromaCandles,
+          },
+          {
+            title: 'Fresheners',
+            image: shopFresheners,
+          },
+        ].map(({ title, image }) => (
+          <section class="group relative col-span-full grid grid-flow-row-dense grid-cols-subgrid">
+            <div class="@container grid p-3 group-even:col-start-2 group-even:border-l">
+              <h2 class="text-2xl/1.2 sm:text-[min(10.55cqi,var(--text-3xl))]/1.2 col-start-1 row-start-1 self-center justify-self-center text-center font-medium">
+                {title}
+              </h2>
+              <Button
+                href="/shop"
+                color="ghost"
+                size="sm"
+                class="col-start-1 row-start-1 self-end justify-self-center font-semibold text-current after:absolute after:inset-0">
+                Shop now
+                <Icon name="arrow-right" />
+              </Button>
+            </div>
+            <Card class="group-odd:border-l group-even:col-start-1">
+              <Image src={image} alt="" class="" slot="image" />
+            </Card>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+
+  <section
+    class="max-lg:grid-rule-y lg:grid-rule-x grid border-t lg:grid-cols-2 lg:items-start">
+    <h2
+      class="text-3xl/1.2 px-4 py-10 font-semibold lg:sticky lg:top-(--header-height)">
+      About us
+    </h2>
+    <div
+      class="flex flex-col justify-between gap-y-16 px-4 py-10 lg:items-start lg:p-(--grid-padding-fluid)">
+      <div class="grid gap-y-6">
+        <h3 class="text-sm/1.2 uppercase">Our story</h3>
+        <p class="text-2xl/1.2 font-medium">Kyiv LuxeBouquets</p>
+        <p class="text-base/1.4">
+          We are a modern local floral studio, which specializes in the design
+          and delivery of unique bouquets. We have the best florists who
+          carefully select each look, our studio cooperates directly with farms
+          for growing different flowers, so we always have fresh flowers, which
+          are collected by our florists in exquisite bouquets. We have a
+          collection of fresh bouquets, collections of dried bouquets, house
+          plants, as well as fragrant candles from luxury brands to create the
+          perfect atmosphere. Make someone's day amazing by sending flowers,
+          plants and gifts the same or next day. Ordering flowers online has
+          never been easier.
+        </p>
+      </div>
+      <Button href="/about" color="secondary" class="mt-auto uppercase">
+        Learn more
+      </Button>
+    </div>
+  </section>
+
+  <section
+    class="max-lg:grid-rule-y lg:grid-rule-x grid border-t lg:grid-cols-2 lg:items-start">
+    <h2
+      class="text-3xl/1.2 px-4 py-10 font-semibold lg:sticky lg:top-(--header-height)">
+      Why choose us ?
+    </h2>
+    <div class="grid-rule-y">
+      {
+        [
+          {
+            title: 'Stylish bouquets by florists',
+            body: 'At our floral studio, our professional florists craft the most elegant and stylish bouquets using only the freshest and highest quality materials available. We stay up-to-date with the latest floral design trends and offer unique arrangements that are sure to impress. Let us brighten up your day with our stunning bouquets and same-day delivery service.',
+          },
+          {
+            title: 'On-time delivery',
+            body: 'Never miss a moment with our on-time flower delivery service. Our couriers will deliver your bouquet personally, without boxes, to ensure it arrives in perfect condition. Trust us to deliver your thoughtful gift reliably.',
+          },
+          {
+            title: 'Safe payment',
+            body: 'You can feel secure when placing an order with us, as we use industry-standard security measures to protect your payment information. Your transaction will be safe and hassle-free, so you can shop with confidence.',
+          },
+          {
+            title: 'Subscription by your needs',
+            body: "With our subscription service tailored to your specific needs, you can enjoy the convenience of having beautiful bouquets delivered straight to your door at regular intervals. Our flexible service is perfect for busy indivisuals. Our flexible service is perfect for busy individuals or those who want to ensure they always have fresh flowers on hand. You'll save time and money with this hassle-free solution to your floral needs.",
+          },
+        ].map(({ title, body }) => (
+          <section class="px-4 py-10 lg:p-(--grid-padding-fluid)">
+            <h3 class="text-2xl/1.2 sm:text-3xl/1.2 font-medium">{title}</h3>
+            <p class="text-base/1.4 mt-4">{body}</p>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <section
+    class="max-lg:grid-rule-y grid grid-flow-row-dense border-t lg:grid-cols-2">
+    <div class="@container grid lg:col-start-2 lg:border-l">
+      <Image
+        src={exterior}
+        alt=""
+        class="aspect-375/420 h-auto w-full object-cover sm:aspect-768/500 lg:aspect-square"
+      />
+      <div
+        class="@max-lg:grid-rule-y @lg:grid-rule-x grid border-t bg-white @lg:grid-cols-2">
+        <h3 class="text-2xl/1.2 p-4 sm:text-center">Follow us</h3>
+        <Social class="items-center" />
+      </div>
+    </div>
+    <section class="grid sm:grid-cols-2">
+      <div class="px-4 py-10 sm:col-span-full sm:p-(--grid-padding-fluid)">
+        <h2 class="text-3xl/1.2 font-semibold capitalize">To contact us</h2>
+        <form action="" class="mt-6 grid gap-4 sm:grid-cols-2">
+          <p class="text-lg/1.4 sm:col-span-full">We will call you back</p>
+          <input
+            type="tel"
+            name="tel"
+            placeholder="+380XX XXX XX XX"
+            required
+            aria-required="true"
+            class={input()}
+          />
+          <button type="submit" class={twMerge(button(), 'uppercase')}>
+            book a call
+          </button>
+        </form>
+      </div>
+      <section class="">
+        <h3 class="text-2xl/1.2 border-y p-4 font-medium sm:text-center">
+          Phone
+        </h3>
+        <div
+          class="mx-auto grid grid-cols-[--spacing(6)_1fr] gap-x-2 gap-y-4 px-4 py-10 sm:w-fit">
+          {
+            ['+380980099777', '+380980099111'].map((phone) => (
+              <a
+                href={`tel:${phone}`}
+                class="col-span-full grid grid-cols-subgrid items-center">
+                <Icon name="phone" />
+                {phone}
+              </a>
+            ))
+          }
+        </div>
+      </section>
+      <section class="sm:border-l">
+        <h3 class="text-2xl/1.2 border-y p-4 font-medium sm:text-center">
+          Address
+        </h3>
+        <div class="mx-auto grid px-4 py-10 sm:w-fit sm:place-items-center">
+          <p class="text-sm/1.2 uppercase">Opening hours: 8 to 11 P.M.</p>
+          <p class="mt-4 flex items-baseline gap-x-1">
+            <Icon name="pin" />
+            <span>15/4 Khreshchatyk Street, Kyiv</span>
+          </p>
+        </div>
+      </section>
+    </section>
+  </section>
+
+  <section class="grid-rule-y grid border-t lg:grid-cols-2">
+    <h2
+      class="text-3xl/1.2 px-4 py-10 font-medium sm:p-(--grid-padding-fluid) sm:text-center lg:col-span-full">
+      Our Service
+    </h2>
+    <Image
+      src={subscription}
+      alt=""
+      class="aspect-375/420 h-auto w-full object-cover object-top sm:aspect-768/500 lg:aspect-square"
+    />
+    <div
+      class="grid px-4 py-10 sm:place-items-center sm:p-(--grid-padding-fluid) lg:border-l">
+      <hgroup class="grid place-items-center gap-y-6">
+        <h3 class="text-sm/1.2 uppercase">Service</h3>
+        <p class="text-3xl/1.2 text-center font-medium capitalize">
+          Flower subscriptions
+        </p>
+      </hgroup>
+      <p class="text-base/1.4 mt-4 text-center">
+        Experience the convenience and savings of regular flower deliveries with
+        our flexible subscription service - up to 30% more profitable than
+        one-time purchases.
+      </p>
+      <Button href="/subscription" color="secondary" class="mt-16 uppercase">
+        Subscribe now
+      </Button>
+    </div>
+    <div
+      class="grid place-content-center place-items-center *:col-start-1 *:row-start-1 lg:col-span-full">
+      <Image src={wedding} alt="" class="h-full w-full object-cover" />
+      <div class="grid px-4 py-13 text-center text-white sm:place-items-center">
+        <hgroup class="grid place-items-center gap-y-6">
+          <h3 class="text-sm/1.2 uppercase">Service</h3>
+          <p class="text-3xl/1.2 font-medium capitalize">
+            Wedding & Event decor
+          </p>
+        </hgroup>
+        <p class="mt-4">
+          Let our team of expert florists and designers create stunning,
+          on-trend<br class="max-sm:hidden" />
+          floral décor for your special day. Trust us to bring your vision to life.
+        </p>
+        <Button href="/" color="tertiary" class="mt-16 uppercase">
+          Inquire now
+        </Button>
+      </div>
+    </div>
+    <div
+      class="grid px-10.5 py-10 sm:place-items-center sm:p-(--grid-padding-fluid) lg:col-span-full">
+      <hgroup class="grid place-items-center gap-y-6">
+        <h3 class="text-sm/1.2 uppercase">Reviews</h3>
+        <p class="text-3xl/1.2 font-medium capitalize">Our clients say</p>
+      </hgroup>
+      <div class="mt-4">
+        <ReviewsCarousel client:visible />
+      </div>
+      <Button href="/" color="secondary" class="mt-16 uppercase">
+        Read reviews
+      </Button>
+    </div>
+  </section>
+</Layout>

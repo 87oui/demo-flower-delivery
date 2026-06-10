@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets'
+
+import Card from '@/components/Card.astro'
+import hero from '@/images/shop/hero.jpg'
+import productAutumnSymphony from '@/images/shop/product-autumn_symphony.jpg'
+import productBlazingBlossoms from '@/images/shop/product-blazing_blossoms.jpg'
+import productBlueHarmony from '@/images/shop/product-blue_harmony.jpg'
+import productDawnsDelight from '@/images/shop/product-dawns_delight.jpg'
+import productMysticalMajesty from '@/images/shop/product-mystical_majesty.jpg'
+import productPinkElegance from '@/images/shop/product-pink_elegance.jpg'
+import productRosyDelight from '@/images/shop/product-rosy_delight.jpg'
+import productRusticCharm from '@/images/shop/product-rustic_charm.jpg'
+import productSerenity from '@/images/shop/product-serenity.jpg'
+import productSnowfall from '@/images/shop/product-snowfall.jpg'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout>
+  <div class="max-lg:grid-rule-y lg:grid-rule-x grid lg:grid-cols-2">
+    <header
+      class="-mb-px grid place-content-center place-items-center self-start border-b bg-black lg:sticky lg:top-(--header-height)">
+      <Image
+        src={hero}
+        alt=""
+        class="col-start-1 row-start-1 aspect-375/420 h-auto w-full object-cover sm:aspect-768/500 lg:aspect-square"
+        fetchpriority="high"
+        loading="eager"
+      />
+      <h1
+        class="text-3xl/1.2 col-start-1 row-start-1 p-4 text-center font-medium text-white capitalize">
+        Fresh flowers
+      </h1>
+    </header>
+    <main
+      class="@container grid *:border-t @md:grid-cols-2 *:even:@md:border-l">
+      {
+        [
+          {
+            title: 'Snowfall',
+            price: 70,
+            image: productSnowfall,
+          },
+          {
+            title: 'Dawns Delight',
+            price: 70,
+            image: productDawnsDelight,
+          },
+          {
+            title: 'Pink Elegance',
+            price: 70,
+            image: productPinkElegance,
+          },
+          {
+            title: 'Rustic Charm',
+            price: 70,
+            image: productRusticCharm,
+          },
+          {
+            title: 'Autumn Symphony',
+            price: 70,
+            image: productAutumnSymphony,
+          },
+          {
+            title: 'Rosy Delight',
+            price: 70,
+            image: productRosyDelight,
+          },
+          {
+            title: 'Serenity',
+            price: 70,
+            image: productSerenity,
+          },
+          {
+            title: 'Blue Harmony',
+            price: 70,
+            image: productBlueHarmony,
+          },
+          {
+            title: 'Mystical Majesty',
+            price: 70,
+            image: productMysticalMajesty,
+          },
+          {
+            title: 'Blazing Blossom',
+            price: 70,
+            image: productBlazingBlossoms,
+          },
+        ].map(({ title, price, image }) => (
+          <div class="">
+            <Card class="relative">
+              <Image src={image} alt={title} slot="image" />
+              <a
+                href="/shop/product"
+                class="after:absolute after:inset-0"
+                slot="title">
+                {title}
+              </a>
+              <Fragment slot="subtitle">price ${price}</Fragment>
+            </Card>
+          </div>
+        ))
+      }
+    </main>
+  </div>
+</Layout>
