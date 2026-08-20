@@ -22,6 +22,7 @@ import Layout from '@/layouts/Layout.astro'
         class="-mb-px grid place-content-center place-items-center self-start border-b bg-black lg:sticky lg:top-(--header-height)">
         <Image
           src={hero}
+          format="avif"
           alt=""
           class="col-start-1 row-start-1 aspect-375/420 h-auto w-full object-cover sm:aspect-768/500 lg:aspect-square"
           fetchpriority="high"
@@ -92,6 +93,7 @@ import Layout from '@/layouts/Layout.astro'
       <div class="self-start lg:sticky lg:top-(--header-height) lg:col-start-2">
         <Image
           src={plan}
+          format="avif"
           alt=""
           class="aspect-375/420 h-auto w-full object-cover object-top sm:aspect-768/500 lg:aspect-square"
         />
@@ -148,6 +150,7 @@ import Layout from '@/layouts/Layout.astro'
               <section class="border-light-gray has-checked:ring-status-success grid border has-checked:ring-2 @md:grid-cols-2">
                 <Image
                   src={image}
+                  format="avif"
                   alt=""
                   class="border-light-gray h-auto w-full object-cover @max-md:border-b @md:h-full"
                 />

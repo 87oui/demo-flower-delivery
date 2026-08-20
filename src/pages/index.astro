@@ -40,6 +40,7 @@ import Layout from '@/layouts/Layout.astro'
         <Image
           src={hero}
           alt=""
+          format="avif"
           class="h-full w-full object-cover"
           fetchpriority="high"
           loading="eager"
@@ -90,7 +91,7 @@ import Layout from '@/layouts/Layout.astro'
               </Button>
             </div>
             <Card class="group-odd:border-l group-even:col-start-1">
-              <Image src={image} alt="" class="" slot="image" />
+              <Image src={image} format="avif" alt="" class="" slot="image" />
             </Card>
           </section>
         ))
@@ -168,6 +169,7 @@ import Layout from '@/layouts/Layout.astro'
     <div class="@container grid lg:col-start-2 lg:border-l">
       <Image
         src={exterior}
+        format="avif"
         alt=""
         class="aspect-375/420 h-auto w-full object-cover sm:aspect-768/500 lg:aspect-square"
       />
@@ -235,6 +237,7 @@ import Layout from '@/layouts/Layout.astro'
     </h2>
     <Image
       src={subscription}
+      format="avif"
       alt=""
       class="aspect-375/420 h-auto w-full object-cover object-top sm:aspect-768/500 lg:aspect-square"
     />
@@ -257,7 +260,12 @@ import Layout from '@/layouts/Layout.astro'
     </div>
     <div
       class="grid place-content-center place-items-center *:col-start-1 *:row-start-1 lg:col-span-full">
-      <Image src={wedding} alt="" class="h-full w-full object-cover" />
+      <Image
+        src={wedding}
+        format="avif"
+        alt=""
+        class="h-full w-full object-cover"
+      />
       <div class="grid px-4 py-13 text-center text-white sm:place-items-center">
         <hgroup class="grid place-items-center gap-y-6">
           <h3 class="text-sm/1.2 uppercase">Service</h3>

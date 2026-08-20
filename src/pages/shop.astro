@@ -22,6 +22,7 @@ import Layout from '@/layouts/Layout.astro'
       class="-mb-px grid place-content-center place-items-center self-start border-b bg-black lg:sticky lg:top-(--header-height)">
       <Image
         src={hero}
+        format="avif"
         alt=""
         class="col-start-1 row-start-1 aspect-375/420 h-auto w-full object-cover sm:aspect-768/500 lg:aspect-square"
         fetchpriority="high"
@@ -89,7 +90,7 @@ import Layout from '@/layouts/Layout.astro'
         ].map(({ title, price, image }) => (
           <div class="">
             <Card class="relative">
-              <Image src={image} alt={title} slot="image" />
+              <Image src={image} format="avif" alt={title} slot="image" />
               <a
                 href="/shop/product"
                 class="after:absolute after:inset-0"
