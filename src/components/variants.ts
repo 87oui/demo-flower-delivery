@@ -5,7 +5,7 @@ export const button = tv({
     'inline-flex cursor-pointer items-center justify-center gap-x-2',
     'border',
     'sm:text-base/1.2 text-sm/none font-medium tracking-wide',
-    'transition-colors',
+    'transition-colors duration-400',
   ],
   variants: {
     color: {

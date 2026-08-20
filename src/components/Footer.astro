@@ -46,7 +46,13 @@ import { button, input } from '@/components/variants'
           <Fragment>
             <dt class="text-gray text-sm/1.2 mt-4">{title}:</dt>
             <dd class="text-sm:1.2 mt-2 font-medium tracking-wide">
-              {content}
+              {content.includes('@') ? (
+                <a href={`mailto:${content}`} class="hover:underline">
+                  {content}
+                </a>
+              ) : (
+                content
+              )}
             </dd>
           </Fragment>
         ))
@@ -75,7 +81,7 @@ import { button, input } from '@/components/variants'
           <ul class="mt-4 space-y-2">
             {items.map((label) => (
               <li class="text-sm/1.2 capitalize">
-                <a href="/shop" class="block">
+                <a href="/shop" class="block hover:underline">
                   {label}
                 </a>
               </li>
@@ -92,7 +98,7 @@ import { button, input } from '@/components/variants'
       {
         ['Our story', 'Blog'].map((label) => (
           <li class="text-sm/1.2">
-            <a href="/" class="block">
+            <a href="/" class="block hover:underline">
               {label}
             </a>
           </li>
@@ -104,7 +110,7 @@ import { button, input } from '@/components/variants'
         ['Shipping & returns', 'Terms & conditions', 'Privacy policy'].map(
           (label) => (
             <li class="text-sm/1.2">
-              <a href="/" class="block">
+              <a href="/" class="block hover:underline">
                 {label}
               </a>
             </li>

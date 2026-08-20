@@ -6,12 +6,14 @@ import Icon from '@/components/Icon'
 const { class: className } = Astro.props
 ---
 
-<ul class={twMerge('flex justify-between flex-wrap', className)}>
+<ul class={twMerge('overflow-clip flex justify-between flex-wrap', className)}>
   {
     ['Instagram', 'Pinterest', 'Facebook', 'Twitter', 'Telegram'].map(
       (name) => (
         <li class="">
-          <a href="/" class="grid size-12 place-content-center">
+          <a
+            href="/"
+            class="grid size-12 place-content-center transition-transform hover:scale-115">
             <Icon name={name.toLowerCase()} />
           </a>
         </li>
