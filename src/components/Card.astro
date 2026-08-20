@@ -5,22 +5,27 @@ const { class: className, ...props } = Astro.props
 ---
 
 <div
-  class={twMerge('grid justify-center w-full h-auto aspect-square', className)}
+  class={twMerge(
+    'group pointer-events-none grid aspect-square h-auto w-full justify-center overflow-clip',
+    className
+  )}
   {...props}>
-  <div class="col-start-1 row-start-1 [&_img]:size-full [&_img]:object-cover">
+  <div
+    class="relative col-start-1 row-start-1 [&_img]:size-full [&_img]:object-cover [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-115 group-hover:[&_img]:duration-400">
     <slot name="image" />
   </div>
-  <div class="col-start-1 row-start-1 grid content-end gap-y-1 p-6 text-center">
+  <div
+    class="relative z-10 col-start-1 row-start-1 grid content-end gap-y-1 p-6 text-center">
     {
       Astro.slots.title && (
-        <p class="text-base/1.2">
+        <p class="text-base/1.2 pointer-events-auto">
           <slot name="title" />
         </p>
       )
     }
     {
       Astro.slots.subtitle && (
-        <p class="text-sm/1.2 text-gray">
+        <p class="text-sm/1.2 text-gray pointer-events-auto">
           <slot name="subtitle" />
         </p>
       )
