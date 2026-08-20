@@ -77,8 +77,8 @@ import Layout from '@/layouts/Layout.astro'
                 'One time purchase. Price $100',
                 'Subscribe now, and save 25% on this order.',
               ].map((label) => (
-                <li class="group col-span-full grid grid-flow-row-dense grid-cols-subgrid">
-                  <label class="col-span-full col-start-2 grid grid-cols-subgrid text-base/6">
+                <li class="group relative col-span-full grid grid-flow-row-dense grid-cols-subgrid">
+                  <label class="col-span-full col-start-2 grid cursor-pointer grid-cols-subgrid text-base/6 after:absolute after:inset-0">
                     <input type="radio" name="option" class="sr-only" />
                     {label}
                   </label>
